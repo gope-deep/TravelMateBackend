@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+/* * AuthController
+ * 
+ * This controller handles user authentication including login.
+ * 
+ * Middleware: None (login is public)
+ * 
+ * Methods:
+ * - login(Request $request): Authenticates user and returns an API token.
+*/
 
 class AuthController extends Controller
 {
