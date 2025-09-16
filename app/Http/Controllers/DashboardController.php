@@ -27,8 +27,8 @@ class DashboardController extends Controller
             'message' => 'Welcome to your dashboard!',
             'user' => $user->only(['id', 'name', 'email']), // pick only needed fields
             'stats' => [
-                'totalUsers' => User::count(),
-                'userList'   => User::select('id', 'name', 'email')->get(),
+                'totalUsers' => \App\Models\User::count(),
+                'userList'   => \App\Models\User::select('id', 'name', 'email')->get(),
             ],
         ]);
     }
