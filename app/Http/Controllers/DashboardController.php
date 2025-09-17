@@ -28,7 +28,9 @@ class DashboardController extends Controller
             'user' => $user->only(['id', 'name', 'email']), // pick only needed fields
             'stats' => [
                 'totalUsers' => \App\Models\User::count(),
-                'userList'   => \App\Models\User::select('id', 'name', 'email')->get(),
+                'userList'   => \App\Models\User::select('id', 'name', 'email')
+                 ->where('id', '!=', $user->id) // exclude logged-in user
+                 ->get(),
             ],
         ]);
     }
