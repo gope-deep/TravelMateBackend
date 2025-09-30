@@ -21,7 +21,7 @@ class AuthController extends Controller
 {
     // login function
     public function login(Request $request){
-
+       // print_r("request". $request);
         // validate incoming request
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
@@ -42,12 +42,21 @@ class AuthController extends Controller
             return response()->json(['message' => 'The provided credentials are incorrect.'], 401);
         }
 
+        // updating device id IOS/Android
+        if(!empty($request->device_id)){
+           $updateUserRes =  User::where('id', $user->id)
+            ->update(['device_id' => $request->device_id]);
+            if($updateUserRes){
+                $user->device_id = $request->device_id;
+            }
+        }
+
         // deleting previous tokens 
         $user->tokens()->delete();
 
         // create token
         $token = $user->createToken('api-token')->plainTextToken;
-
+         
         // return response with user and token
         return response()->json(['user' => $user, 'token' => $token], 200);
     }
