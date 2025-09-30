@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PushNotificationController;
 
 // Public route for user login
 Route::post('/login', [AuthController::class, 'login']);
@@ -26,3 +27,4 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
+Route::post('/send-notification', [PushNotificationController::class, 'send']);
